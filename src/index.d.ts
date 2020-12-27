@@ -158,7 +158,7 @@ declare module 'discord-akairo' {
         public channel?: string;
         public client: AkairoClient;
         public clientPermissions: PermissionResolvable | PermissionResolvable[] | MissingPermissionSupplier;
-        public cooldown?: number;
+        public cooldown?: number | CoolDownCheck;
         public description: string | any;
         public editable: boolean;
         public filepath: string;
@@ -200,7 +200,7 @@ declare module 'discord-akairo' {
         public commandUtils: Collection<string, CommandUtil>;
         public commandUtilSweepInterval: number;
         public cooldowns: Collection<string, { [id: string]: CooldownData }>;
-        public defaultCooldown: number;
+        public defaultCooldown: number | CoolDownCheck;
         public directory: string;
         public fetchMembers: boolean;
         public handleEdits: boolean;
@@ -552,7 +552,7 @@ declare module 'discord-akairo' {
         channel?: 'guild' | 'dm';
         clientPermissions?: PermissionResolvable | PermissionResolvable[] | MissingPermissionSupplier;
         condition?: ExecutionPredicate;
-        cooldown?: number;
+        cooldown?: number | CoolDownCheck;
         description?: StringResolvable;
         editable?: boolean;
         flags?: string[];
@@ -579,7 +579,7 @@ declare module 'discord-akairo' {
         commandUtil?: boolean;
         commandUtilLifetime?: number;
         commandUtilSweepInterval?: number;
-        defaultCooldown?: number;
+        defaultCooldown?: number | CoolDownCheck;
         fetchMembers?: boolean;
         handleEdits?: boolean;
         ignoreCooldown?: Snowflake | Snowflake[] | IgnoreCheckPredicate;
@@ -672,6 +672,8 @@ declare module 'discord-akairo' {
     export type ExecutionPredicate = (message: Message) => boolean;
 
     export type IgnoreCheckPredicate = (message: Message, command: Command) => boolean;
+
+    export type CoolDownCheck = (message: Message) => number;
 
     export type KeySupplier = (message: Message, args: any) => string;
 
